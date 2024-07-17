@@ -34,12 +34,12 @@ const Device = () => {
 
     // Set user info using platform.js
     const info = {
-      browser: platform.name,
-      os: platform.os.family,
-      deviceType: mobile() ? "Mobile" : "Desktop",
+      browser: t(platform.name.toLowerCase()) || platform.name,
+      os: t(platform.os.family.toLowerCase()) || platform.os.family,
+      deviceType: mobile() ? t("mobile") : t("desktop"),
     };
     setUserInfo(info);
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     // Update background color based on the selected language

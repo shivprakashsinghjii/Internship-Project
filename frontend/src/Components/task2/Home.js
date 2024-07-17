@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Language from "./Language";
 import { useTranslation } from "react-i18next";
+import Device from "../task3/Device";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -77,6 +78,7 @@ const Home = () => {
             {t("welcome")}, {email}
           </p>
           <Language />
+          <Device />
         </div>
       </div>
     </div>

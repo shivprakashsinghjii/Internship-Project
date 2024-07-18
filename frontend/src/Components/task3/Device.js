@@ -64,9 +64,9 @@ const Device = () => {
   }, [i18n.language]);
 
   return (
-    <div className="max-w-md w-full text-center mt-4">
+    <div className="max-w-md w-full mx-auto text-center mt-4 p-4 ">
       {userInfo && (
-        <div className="">
+        <div>
           <h2 className="text-lg font-bold mb-2">{t("userInformation")}</h2>
           <p>
             <strong>{t("browser")}:</strong> {userInfo.browser}
@@ -78,7 +78,7 @@ const Device = () => {
             <strong>{t("deviceType")}:</strong> {userInfo.deviceType}
           </p>
           {ipAddress && (
-            <div className="">
+            <div className="mt-4">
               <h2 className="text-lg font-bold mb-2">{t("yourIpAddress")}</h2>
               <p>{ipAddress}</p>
             </div>

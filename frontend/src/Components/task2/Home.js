@@ -11,11 +11,6 @@ const Home = () => {
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("email");
-    if (storedEmail) {
-      setEmail(storedEmail);
-    } else {
-      navigate("/signin"); // Redirect to sign-in if no email is found
-    }
   }, [navigate]);
 
   useEffect(() => {
@@ -70,13 +65,6 @@ const Home = () => {
       </nav>
       <div className="flex-grow flex flex-col items-center justify-start pt-8">
         <div className="max-w-md w-full text-center">
-          <p
-            className={`text-sm mb-4 ${
-              isWhiteText ? "text-white" : "text-gray-600"
-            }`}
-          >
-            {t("welcome")}, {email}
-          </p>
           <Language />
           <Device />
         </div>

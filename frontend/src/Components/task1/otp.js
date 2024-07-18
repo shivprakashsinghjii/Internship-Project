@@ -40,23 +40,34 @@ const Otp = () => {
 
   return (
     <>
-      <section>
-        <div className="form_data">
-          <div className="form_heading">
-            <h1>Please Enter Your OTP Here</h1>
+      <section className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+          <div className="mb-4">
+            <h1 className="text-2xl font-bold text-center">
+              Please Enter Your OTP Here
+            </h1>
           </div>
           <form>
-            <div className="form_input">
-              <label htmlFor="otp">OTP</label>
+            <div className="mb-4">
+              <label
+                htmlFor="otp"
+                className="block text-sm font-medium text-gray-700"
+              >
+                OTP
+              </label>
               <input
                 type="text"
                 name="otp"
-                id=""
+                id="otp"
                 onChange={(e) => setOtp(e.target.value)}
                 placeholder="Enter Your OTP"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <button className="btn" onClick={LoginUser}>
+            <button
+              className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600"
+              onClick={LoginUser}
+            >
               Submit
             </button>
           </form>

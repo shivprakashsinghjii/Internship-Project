@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
-
-import { registerfunction } from "./../../services/Apis";
+import { useNavigate, NavLink } from "react-router-dom";
+import { registerfunction } from "../../services/Apis";
 
 const styles = {
   body: {
     backgroundColor: "#f7f7f7",
     fontFamily: "Arial, sans-serif",
+    padding: "10px",
   },
   section: {
     display: "flex",
@@ -21,7 +21,8 @@ const styles = {
     padding: "20px",
     borderRadius: "8px",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-    width: "300px",
+    width: "100%",
+    maxWidth: "400px",
   },
   form_heading: {
     marginBottom: "20px",
@@ -33,6 +34,7 @@ const styles = {
   form_input_label: {
     display: "block",
     marginBottom: "5px",
+    fontWeight: "bold",
   },
   form_input_input: {
     width: "100%",
@@ -58,6 +60,7 @@ const styles = {
     borderRadius: "4px",
     cursor: "pointer",
     fontSize: "16px",
+    marginTop: "10px",
   },
   link: {
     textAlign: "center",
@@ -116,10 +119,6 @@ const Register = () => {
           <div style={styles.form_data}>
             <div style={styles.form_heading}>
               <h1>Sign Up</h1>
-              <p style={{ textAlign: "center" }}>
-                We are glad that you will be using Project Cloud to manage your
-                tasks! We hope that you will like it.
-              </p>
             </div>
             <form>
               <div style={styles.form_input}>
@@ -130,6 +129,7 @@ const Register = () => {
                   type="text"
                   name="fname"
                   id="fname"
+                  value={inputdata.fname}
                   onChange={handleChange}
                   placeholder="Enter Your Name"
                   style={styles.form_input_input}
@@ -143,6 +143,7 @@ const Register = () => {
                   type="email"
                   name="email"
                   id="email"
+                  value={inputdata.email}
                   onChange={handleChange}
                   placeholder="Enter Your Email Address"
                   style={styles.form_input_input}
@@ -157,6 +158,7 @@ const Register = () => {
                     type={!passhow ? "password" : "text"}
                     name="password"
                     id="password"
+                    value={inputdata.password}
                     onChange={handleChange}
                     placeholder="Enter Your password"
                     style={styles.form_input_input}
@@ -173,7 +175,12 @@ const Register = () => {
               <button className="btn" onClick={handleSubmit} style={styles.btn}>
                 Sign Up
               </button>
-              <p style={styles.link}>Don't have an account?</p>
+              <p style={styles.link}>
+                If you have an account, please{" "}
+                <NavLink to="/signin" style={{ color: "#007bff" }}>
+                  login
+                </NavLink>
+              </p>
             </form>
           </div>
           <ToastContainer />

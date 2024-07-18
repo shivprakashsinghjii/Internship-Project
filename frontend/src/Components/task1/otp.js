@@ -5,9 +5,7 @@ import { userVerify } from "../../../src/services/Apis";
 
 const Otp = () => {
   const [otp, setOtp] = useState("");
-
   const location = useLocation();
-
   const navigate = useNavigate();
 
   const LoginUser = async (e) => {

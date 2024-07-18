@@ -5,12 +5,24 @@ import { useTranslation } from "react-i18next";
 import Device from "../task3/Device";
 
 const Home = () => {
-  const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("email");
+    const userToken = localStorage.getItem("userdbtoken");
+
+    console.log("Checking authentication...");
+    console.log("Email from localStorage:", storedEmail);
+    console.log("Token from localStorage:", userToken);
+
+    // Redirect to sign-in page if the user is not authenticated
+    if (!storedEmail && !userToken) {
+      console.log("No authentication found. Redirecting to /signin...");
+      navigate("/signin");
+    } else {
+      console.log("User authenticated.");
+    }
   }, [navigate]);
 
   useEffect(() => {
@@ -33,6 +45,7 @@ const Home = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("email");
+    localStorage.removeItem("userdbtoken");
     navigate("/signin"); // Navigate to the sign-in page
   };
 
@@ -40,7 +53,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className=" shadow-md">
+      <nav className="shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">

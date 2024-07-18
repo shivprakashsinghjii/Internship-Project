@@ -24,7 +24,7 @@ const Login = () => {
       const response = await sentOtpFunction(data);
       if (response.status === 200) {
         setSpiner(false);
-        navigate("/otp", { state: email });
+        navigate("/otps", { state: email });
       } else {
         setSpiner(false);
         toast.error(response.response.data.error);
@@ -38,10 +38,9 @@ const Login = () => {
         <section className="flex justify-center items-center h-full">
           <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
             <div className="mb-6 text-center">
-              <h1 className="text-2xl font-bold">Welcome Back, Log In</h1>
-              <p className="text-gray-600">
-                Hi, we are glad you are back. Please log in.
-              </p>
+              <h1 className="text-2xl font-bold">
+                Pour passer au français, veuillez authentifier l'email.
+              </h1>
             </div>
             <form>
               <div className="mb-4">
@@ -49,14 +48,14 @@ const Login = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Email
+                  e-mail
                 </label>
                 <input
                   type="email"
                   name="email"
                   id="email"
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter Your Email Address"
+                  placeholder="Entrez votre adresse e-mail"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
@@ -64,19 +63,13 @@ const Login = () => {
                 className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 flex items-center justify-center"
                 onClick={sendOtp}
               >
-                Login
+                Connexion
                 {spiner && (
                   <span className="ml-2">
                     <Spinner animation="border" size="sm" />
                   </span>
                 )}
               </button>
-              <p className="text-center mt-4">
-                Don't have an account?{" "}
-                <NavLink to="/register" className="text-blue-500">
-                  Sign up
-                </NavLink>
-              </p>
             </form>
           </div>
           <ToastContainer />

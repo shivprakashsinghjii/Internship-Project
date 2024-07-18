@@ -8,6 +8,7 @@ import Login from "./Components/task1/Login";
 import Register from "./Components/task1/Register";
 import Otp from "./Components/task1/otp";
 import Otpforlanguage from "./Components/task2/otpAuthentication";
+import Otps from "./Components/task2/otp";
 // import OTPVerification from "./Components/task2/OTPVerification"; // Ensure this path is correct
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/otplan" element={<Otpforlanguage />} />
+        <Route path="/otps" element={<Otps />} />
       </Routes>
     </Router>
   );

@@ -177,7 +177,7 @@ const Register = () => {
               </button>
               <p style={styles.link}>
                 If you have an account, please{" "}
-                <NavLink to="/signin" style={{ color: "#007bff" }}>
+                <NavLink to="/" style={{ color: "#007bff" }}>
                   login
                 </NavLink>
               </p>

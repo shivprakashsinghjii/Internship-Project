@@ -2,26 +2,25 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { userVerify } from "../../../src/services/Apis";
+import LanguageSelector from "./LanguageSelector"; // Import your LanguageSelector component
 
 const Otp = () => {
   const [otp, setOtp] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const [authenticated, setAuthenticated] = useState(false); // State to track authentication status
 
   const handleSuccessfulLogin = async (response) => {
-    // Simulate setting language and background color
-    // Replace with actual logic using React Context or state management
-    localStorage.setItem("preferredLanguage", "fr"); // Set language to French
-    document.body.style.backgroundColor = "#ffff00"; // Set background color to yellow
-
     localStorage.setItem("userdbtoken", response.data.userToken);
     toast.success(response.data.message);
+
     setTimeout(() => {
+      setAuthenticated(true); // Set authentication status to true
       navigate("/home");
     }, 3000); // Redirect to home page after 3 seconds
   };
 
-  const LoginUser = async (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
 
     if (otp === "") {
@@ -73,7 +72,7 @@ const Otp = () => {
             </div>
             <button
               className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 text-2xl"
-              onClick={LoginUser}
+              onClick={loginUser}
             >
               &rarr; Verify OTP
             </button>
@@ -81,6 +80,7 @@ const Otp = () => {
         </div>
         <ToastContainer />
       </section>
+      {authenticated && <LanguageSelector authenticated={authenticated} />}
     </>
   );
 };

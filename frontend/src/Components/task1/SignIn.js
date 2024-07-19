@@ -14,6 +14,11 @@ const SignIn = () => {
   const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
 
+  const isMicrosoftBrowser = () => {
+    const userAgent = window.navigator.userAgent;
+    return /Edge|MSIE|Trident/.test(userAgent);
+  };
+
   const sendOtp = async (e) => {
     e.preventDefault();
 
@@ -55,9 +60,13 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    const storedEmail = localStorage.getItem("email");
-    if (storedEmail) {
+    if (isMicrosoftBrowser()) {
       navigate("/home");
+    } else {
+      const storedEmail = localStorage.getItem("email");
+      if (storedEmail) {
+        navigate("/home");
+      }
     }
   }, [navigate]);
 
@@ -126,9 +135,9 @@ const SignIn = () => {
               <span>Sign in with Google</span>
             </button>
             <p className="text-center mt-4">
-              Don't have an account?{" "}
+              {" "}
               <NavLink to="/register" className="text-blue-500">
-                Sign up
+                Don't have an account? Sign up
               </NavLink>
             </p>
           </div>

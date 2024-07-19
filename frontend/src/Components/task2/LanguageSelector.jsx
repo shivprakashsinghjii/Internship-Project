@@ -1,3 +1,5 @@
+// LanguageSelector.js
+
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -9,18 +11,17 @@ const languages = [
   { code: "hi", lang: "Hindi", redirectPath: "/phone" },
   { code: "pt", lang: "Portuguese", redirectPath: "/phone" },
   { code: "zh", lang: "Chinese", redirectPath: "/phone" },
-  { code: "fr", lang: "French", redirectPath: "/phone" }, // Changed redirectPath to "/phone"
+  { code: "fr", lang: "French", redirectPath: "/otplan" },
 ];
 
-const LanguageSelector = ({ isAuthenticated }) => {
-  const { t } = useTranslation();
+const LanguageSelector = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const changeLanguageFunction = (languageCode, redirectPath) => {
     let backgroundColor = "#ffffff"; // Default white
 
-    // Set background color based on language code
     switch (languageCode) {
       case "hi":
         backgroundColor = "#007BFF"; // Blue for Hindi
@@ -35,11 +36,10 @@ const LanguageSelector = ({ isAuthenticated }) => {
         break;
     }
 
-    // Set body background color
     document.body.style.backgroundColor = backgroundColor;
 
-    // Change language and navigate to the specified redirect path
-    changeLanguage(languageCode);
+    // Change language using i18n
+    i18n.changeLanguage(languageCode);
     setSelectedLanguage(languageCode);
     navigate(redirectPath);
   };

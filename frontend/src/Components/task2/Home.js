@@ -7,26 +7,40 @@ import Device from "../task3/Device";
 const Home = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const [isAllowed, setIsAllowed] = useState(true);
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("email");
     const userToken = localStorage.getItem("userdbtoken");
 
-    console.log("Checking authentication...");
-    console.log("Email from localStorage:", storedEmail);
-    console.log("Token from localStorage:", userToken);
+    const isMobileDevice = () => {
+      return /Mobi|Android/i.test(navigator.userAgent);
+    };
 
-    // Redirect to sign-in page if the user is not authenticated
+    const isAccessAllowedTime = () => {
+      const currentTime = new Date();
+      const currentHour = currentTime.getHours();
+      return currentHour >= 10 && currentHour < 13;
+    };
+
     if (!storedEmail && !userToken) {
-      console.log("No authentication found. Redirecting to /signin...");
-      navigate("/signin");
+      navigate("/");
+    } else if (isMobileDevice() && !isAccessAllowedTime()) {
+      setIsAllowed(false);
     } else {
-      console.log("User authenticated.");
+      setIsAllowed(true);
     }
+
+    const intervalId = setInterval(() => {
+      window.location.reload();
+    }, 3000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [navigate]);
 
   useEffect(() => {
-    // Update background color based on the selected language
     switch (i18n.language) {
       case "hi":
         document.body.style.backgroundColor = "blue";
@@ -46,10 +60,26 @@ const Home = () => {
   const handleLogout = () => {
     localStorage.removeItem("email");
     localStorage.removeItem("userdbtoken");
-    navigate("/signin"); // Navigate to the sign-in page
+    navigate("/");
+  };
+
+  const navigateToHistory = () => {
+    navigate("/history");
   };
 
   const isWhiteText = i18n.language === "hi" || i18n.language === "zh";
+
+  if (!isAllowed) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1 className="text-3xl font-bold">Access Restricted</h1>
+        <p className="text-lg">
+          Access to the website is only allowed from 10 AM to 1 PM on mobile
+          devices.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -66,6 +96,12 @@ const Home = () => {
               </h1>
             </div>
             <div className="flex items-center">
+              <button
+                onClick={navigateToHistory}
+                className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out mr-4"
+              >
+                {t("history")}
+              </button>
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out"

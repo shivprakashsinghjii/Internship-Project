@@ -50,7 +50,7 @@ const Device = () => {
 
     // Auto-refresh the page every 3 seconds
     const intervalId = setInterval(() => {
-      updateUserInfo();
+      // updateUserInfo();
     }, 3000);
 
     // Clear the interval on component unmount
@@ -144,9 +144,9 @@ const Device = () => {
       {userInfo && (
         <div>
           <h2 className="text-lg font-bold mb-2">{t("userInformation")}</h2>
-          <p>
+          {/* <p>
             <strong>{t("email")}:</strong> {userInfo.email}
-          </p>
+          </p> */}
           <p>
             <strong>{t("browser")}:</strong> {userInfo.browser}
           </p>

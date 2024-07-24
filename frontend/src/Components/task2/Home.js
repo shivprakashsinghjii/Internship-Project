@@ -20,7 +20,7 @@ const Home = () => {
     const isAccessAllowedTime = () => {
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
-      return currentHour >= 10 && currentHour < 13;
+      return currentHour >= 0 && currentHour < 24;
     };
 
     if (!storedEmail && !userToken) {
@@ -32,7 +32,7 @@ const Home = () => {
     }
 
     const intervalId = setInterval(() => {
-      window.location.reload();
+      // window.location.reload();
     }, 3000);
 
     return () => {

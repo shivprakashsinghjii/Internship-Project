@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "./Components/task1/SignIn";
 import Home from "./Components/task2/Home";
 import Language from "./Components/task2/Language";
-import Phone from "./Components/task2/PhoneAuthentiction";
+import Phone from "./Components/task3/PhoneAuthentiction";
 import Login from "./Components/task1/Login";
 import Register from "./Components/task1/Register";
 import Otp from "./Components/task1/otp";
